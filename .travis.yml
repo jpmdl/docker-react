@@ -1,0 +1,11 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+# the tag could be anything because it's going to be used just for travis
+before_install:
+  - docker build -t jploureiro/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true jploureiro/docker-react npm run test
