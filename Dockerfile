@@ -17,6 +17,9 @@ RUN npm run build
 # Just naming a FROM statement again, terminates previous step
 FROM nginx
 
+# The expose is used by AWS to expose the port
+EXPOSE 80
+
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # No need to override CMD, the default nginx command will do
