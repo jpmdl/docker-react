@@ -9,3 +9,16 @@ before_install:
 
 script:
   - docker run -e CI=true jploureiro/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk # Travis is capacitated to deploy to a lot of providers
+  region: "eu-west-2" # Copied from the url aws provides
+  app: "docker-react" # The exact name of the app as aws shows it
+  env: "DockerReact-env" # The environment just liek aes shows it
+  bucket_name: "elasticbeanstalk-eu-west-2-938452703731" # All of our files into a zip and copied to aws - search for S3 on amazon services and copy the name of the service
+  bucket_path: "docker-react" # By default, the folder assumes the app name
+  on:
+    branch: master # Where the trigger stands for deploy
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
