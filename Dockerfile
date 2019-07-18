@@ -5,10 +5,10 @@ FROM node:alpine as builder
 
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 
-COPY . .
+COPY ./ ./
 
 # CMD should be final, if it's an intermediate step, should be RUN
 RUN npm run build
